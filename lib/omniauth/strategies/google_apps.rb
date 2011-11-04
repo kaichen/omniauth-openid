@@ -17,7 +17,9 @@ module OmniAuth
       end
 
       def identifier
-        options[:domain] || request['domain']
+        domain = options[:domain] || request['domain']
+        return nil if domain.nil?
+        "https://www.google.com/accounts/o8/site-xrds?ns=2&hd=#{domain}"
       end
     end
   end
