@@ -5,7 +5,11 @@ module OmniAuth
     class GoogleApps < OmniAuth::Strategies::OpenID
       def initialize(app, store = nil, options = {}, &block)
         options[:name] ||= 'google_apps'
-        options[:store] = store
+        if store.is_a?(Hash) and options.empty?
+          options = store
+        else
+          options[:store] = store
+        end
         super(app, options, &block)
       end
 
